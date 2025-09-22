@@ -84,7 +84,7 @@ type OperatorTable p a = [[Operator p a]]
 -- >  prefix  name fun       = Prefix (do{ reservedOp name; return fun })
 -- >  postfix name fun       = Postfix (do{ reservedOp name; return fun })
 
-buildExpressionParser :: (Monad p, Alternative p) => [[Operator p b]] -> p b -> p b
+buildExpressionParser :: (MonadFail p, Alternative p) => [[Operator p b]] -> p b -> p b
 buildExpressionParser operators simpleExpr
     = foldl makeParser simpleExpr operators
     where
